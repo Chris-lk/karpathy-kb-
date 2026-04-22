@@ -1,0 +1,51 @@
+{
+  "generated_at": "2026-04-22T14:04:39.934862",
+  "total_pages": 24,
+  "total_links": 134,
+  "avg_degree": 11.17,
+  "most_cited": [
+    {
+      "name": "物联网",
+      "count": 18
+    },
+    {
+      "name": "2026-04-12",
+      "count": 17
+    },
+    {
+      "name": "工业物联网",
+      "count": 16
+    },
+    {
+      "name": "边缘计算",
+      "count": 16
+    },
+    {
+      "name": "industrial_iot",
+      "count": 9
+    }
+  ],
+  "most_linking": [
+    {
+      "name": "compiled_knowledge",
+      "count": 12
+    },
+    {
+      "name": "工业物联网",
+      "count": 11
+    },
+    {
+      "name": "边缘计算",
+      "count": 11
+    },
+    {
+      "name": "KubeEdge",
+      "count": 9
+    },
+    {
+      "name": "容器技术",
+      "count": 9
+    }
+  ],
+  "isolated_pages": []
+}

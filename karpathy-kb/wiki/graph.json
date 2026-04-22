@@ -1,0 +1,15 @@
+{
+  "nodes": [
+    {
+      "id": "compiled_knowledge",
+      "label": "compiled_knowledge",
+      "type": "page"
+    },
+    {
+      "id": "物联网",
+      "label": "物联网",
+      "type": "page"
+    }
+  ],
+  "links": []
+}

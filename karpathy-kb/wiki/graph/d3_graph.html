@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>知识图谱</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 0;
+            background: #1a1a1a;
+        }
+        .container { display: flex; height: 100vh; }
+        .sidebar {
+            width: 300px;
+            background: #2d2d2d;
+            color: white;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        .graph-container { flex: 1; }
+        h1 { font-size: 18px; margin-bottom: 20px; color: #3498db; }
+        .stat-item { margin: 10px 0; padding: 10px; background: #3d3d3d; border-radius: 5px; }
+        .node { stroke: #fff; stroke-width: 1.5px; cursor: pointer; }
+        .node:hover { stroke: #3498db; stroke-width: 3px; }
+        .link { stroke: #999; stroke-opacity: 0.6; }
+        .node-label { 
+            fill: white; 
+            font-size: 12px;
+            pointer-events: none;
+        }
+        .tooltip {
+            position: absolute;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            pointer-events: none;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h1>知识库统计</h1>
+            <div class="stat-item">
+                <strong>总页面数:</strong> 24
+            </div>
+            <div class="stat-item">
+                <strong>总链接数:</strong> 134
+            </div>
+            <div class="stat-item">
+                <strong>平均关联度:</strong> 11.17
+            </div>
+            <h2>最高引用页面</h2>
+
+            <div class="stat-item">
+                <strong>物联网:</strong> 18 次引用
+            </div>
+            <div class="stat-item">
+                <strong>2026-04-12:</strong> 17 次引用
+            </div>
+            <div class="stat-item">
+                <strong>工业物联网:</strong> 16 次引用
+            </div>
+            <div class="stat-item">
+                <strong>边缘计算:</strong> 16 次引用
+            </div>
+            <div class="stat-item">
+                <strong>industrial_iot:</strong> 9 次引用
+            </div>
+        </div>
+        <div class="graph-container">
+            <svg id="graph"></svg>
+        </div>
+    </div>
+    <div class="tooltip" id="tooltip"></div>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script>
+        const nodes = [{"id": "compiled_knowledge", "in_degree": 0, "out_degree": 12}, {"id": "物联网", "in_degree": 18, "out_degree": 0}, {"id": "2026-04-12", "in_degree": 17, "out_degree": 0}, {"id": "EdgeX Foundry", "in_degree": 3, "out_degree": 8}, {"id": "edge_computing", "in_degree": 7, "out_degree": 1}, {"id": "industrial_iot", "in_degree": 9, "out_degree": 1}, {"id": "KubeEdge", "in_degree": 5, "out_degree": 9}, {"id": "Kubernetes", "in_degree": 4, "out_degree": 7}, {"id": "OpenYurt", "in_degree": 4, "out_degree": 6}, {"id": "供应链可视化", "in_degree": 2, "out_degree": 4}, {"id": "协议转换网关", "in_degree": 4, "out_degree": 6}, {"id": "容器技术", "in_degree": 6, "out_degree": 9}, {"id": "工业物联网", "in_degree": 16, "out_degree": 11}, {"id": "工业物联网实施挑战", "in_degree": 4, "out_degree": 7}, {"id": "工业物联网应用", "in_degree": 1, "out_degree": 3}, {"id": "数字孪生", "in_degree": 3, "out_degree": 6}, {"id": "数据孤岛问题", "in_degree": 1, "out_degree": 5}, {"id": "物联网基础", "in_degree": 1, "out_degree": 2}, {"id": "生产过程优化", "in_degree": 3, "out_degree": 6}, {"id": "精确时间协议", "in_degree": 2, "out_degree": 5}, {"id": "边缘计算", "in_degree": 16, "out_degree": 11}, {"id": "边缘计算技术", "in_degree": 1, "out_degree": 2}, {"id": "边缘计算挑战", "in_degree": 2, "out_degree": 7}, {"id": "预测性维护", "in_degree": 5, "out_degree": 6}];
+        const links = [{"source": "compiled_knowledge", "target": "物联网"}, {"source": "compiled_knowledge", "target": "2026-04-12"}, {"source": "compiled_knowledge", "target": "EdgeX Foundry"}, {"source": "compiled_knowledge", "target": "KubeEdge"}, {"source": "compiled_knowledge", "target": "供应链可视化"}, {"source": "compiled_knowledge", "target": "工业物联网"}, {"source": "compiled_knowledge", "target": "工业物联网应用"}, {"source": "compiled_knowledge", "target": "物联网基础"}, {"source": "compiled_knowledge", "target": "生产过程优化"}, {"source": "compiled_knowledge", "target": "边缘计算"}, {"source": "compiled_knowledge", "target": "边缘计算技术"}, {"source": "compiled_knowledge", "target": "预测性维护"}, {"source": "EdgeX Foundry", "target": "物联网"}, {"source": "EdgeX Foundry", "target": "2026-04-12"}, {"source": "EdgeX Foundry", "target": "edge_computing"}, {"source": "EdgeX Foundry", "target": "协议转换网关"}, {"source": "EdgeX Foundry", "target": "容器技术"}, {"source": "EdgeX Foundry", "target": "工业物联网"}, {"source": "EdgeX Foundry", "target": "边缘计算"}, {"source": "EdgeX Foundry", "target": "预测性维护"}, {"source": "edge_computing", "target": "2026-04-12"}, {"source": "industrial_iot", "target": "2026-04-12"}, {"source": "KubeEdge", "target": "物联网"}, {"source": "KubeEdge", "target": "2026-04-12"}, {"source": "KubeEdge", "target": "edge_computing"}, {"source": "KubeEdge", "target": "Kubernetes"}, {"source": "KubeEdge", "target": "OpenYurt"}, {"source": "KubeEdge", "target": "容器技术"}, {"source": "KubeEdge", "target": "工业物联网"}, {"source": "KubeEdge", "target": "边缘计算"}, {"source": "KubeEdge", "target": "边缘计算挑战"}, {"source": "Kubernetes", "target": "物联网"}, {"source": "Kubernetes", "target": "edge_computing"}, {"source": "Kubernetes", "target": "KubeEdge"}, {"source": "Kubernetes", "target": "OpenYurt"}, {"source": "Kubernetes", "target": "容器技术"}, {"source": "Kubernetes", "target": "工业物联网"}, {"source": "Kubernetes", "target": "边缘计算"}, {"source": "OpenYurt", "target": "2026-04-12"}, {"source": "OpenYurt", "target": "edge_computing"}, {"source": "OpenYurt", "target": "KubeEdge"}, {"source": "OpenYurt", "target": "Kubernetes"}, {"source": "OpenYurt", "target": "容器技术"}, {"source": "OpenYurt", "target": "边缘计算"}, {"source": "供应链可视化", "target": "物联网"}, {"source": "供应链可视化", "target": "industrial_iot"}, {"source": "供应链可视化", "target": "工业物联网"}, {"source": "供应链可视化", "target": "边缘计算"}, {"source": "协议转换网关", "target": "物联网"}, {"source": "协议转换网关", "target": "2026-04-12"}, {"source": "协议转换网关", "target": "industrial_iot"}, {"source": "协议转换网关", "target": "工业物联网"}, {"source": "协议转换网关", "target": "工业物联网实施挑战"}, {"source": "协议转换网关", "target": "边缘计算"}, {"source": "容器技术", "target": "物联网"}, {"source": "容器技术", "target": "2026-04-12"}, {"source": "容器技术", "target": "EdgeX Foundry"}, {"source": "容器技术", "target": "edge_computing"}, {"source": "容器技术", "target": "KubeEdge"}, {"source": "容器技术", "target": "Kubernetes"}, {"source": "容器技术", "target": "OpenYurt"}, {"source": "容器技术", "target": "工业物联网"}, {"source": "容器技术", "target": "边缘计算"}, {"source": "工业物联网", "target": "物联网"}, {"source": "工业物联网", "target": "2026-04-12"}, {"source": "工业物联网", "target": "industrial_iot"}, {"source": "工业物联网", "target": "供应链可视化"}, {"source": "工业物联网", "target": "协议转换网关"}, {"source": "工业物联网", "target": "工业物联网实施挑战"}, {"source": "工业物联网", "target": "数字孪生"}, {"source": "工业物联网", "target": "生产过程优化"}, {"source": "工业物联网", "target": "精确时间协议"}, {"source": "工业物联网", "target": "边缘计算"}, {"source": "工业物联网", "target": "预测性维护"}, {"source": "工业物联网实施挑战", "target": "物联网"}, {"source": "工业物联网实施挑战", "target": "2026-04-12"}, {"source": "工业物联网实施挑战", "target": "industrial_iot"}, {"source": "工业物联网实施挑战", "target": "协议转换网关"}, {"source": "工业物联网实施挑战", "target": "工业物联网"}, {"source": "工业物联网实施挑战", "target": "数据孤岛问题"}, {"source": "工业物联网实施挑战", "target": "边缘计算"}, {"source": "工业物联网应用", "target": "物联网"}, {"source": "工业物联网应用", "target": "2026-04-12"}, {"source": "工业物联网应用", "target": "工业物联网"}, {"source": "数字孪生", "target": "物联网"}, {"source": "数字孪生", "target": "2026-04-12"}, {"source": "数字孪生", "target": "industrial_iot"}, {"source": "数字孪生", "target": "工业物联网"}, {"source": "数字孪生", "target": "边缘计算"}, {"source": "数字孪生", "target": "预测性维护"}, {"source": "数据孤岛问题", "target": "物联网"}, {"source": "数据孤岛问题", "target": "industrial_iot"}, {"source": "数据孤岛问题", "target": "协议转换网关"}, {"source": "数据孤岛问题", "target": "工业物联网"}, {"source": "数据孤岛问题", "target": "工业物联网实施挑战"}, {"source": "物联网基础", "target": "物联网"}, {"source": "物联网基础", "target": "2026-04-12"}, {"source": "生产过程优化", "target": "物联网"}, {"source": "生产过程优化", "target": "industrial_iot"}, {"source": "生产过程优化", "target": "工业物联网"}, {"source": "生产过程优化", "target": "数字孪生"}, {"source": "生产过程优化", "target": "精确时间协议"}, {"source": "生产过程优化", "target": "边缘计算"}, {"source": "精确时间协议", "target": "物联网"}, {"source": "精确时间协议", "target": "industrial_iot"}, {"source": "精确时间协议", "target": "工业物联网"}, {"source": "精确时间协议", "target": "生产过程优化"}, {"source": "精确时间协议", "target": "边缘计算"}, {"source": "边缘计算", "target": "物联网"}, {"source": "边缘计算", "target": "2026-04-12"}, {"source": "边缘计算", "target": "EdgeX Foundry"}, {"source": "边缘计算", "target": "edge_computing"}, {"source": "边缘计算", "target": "KubeEdge"}, {"source": "边缘计算", "target": "Kubernetes"}, {"source": "边缘计算", "target": "OpenYurt"}, {"source": "边缘计算", "target": "容器技术"}, {"source": "边缘计算", "target": "工业物联网"}, {"source": "边缘计算", "target": "边缘计算挑战"}, {"source": "边缘计算", "target": "预测性维护"}, {"source": "边缘计算技术", "target": "2026-04-12"}, {"source": "边缘计算技术", "target": "边缘计算"}, {"source": "边缘计算挑战", "target": "物联网"}, {"source": "边缘计算挑战", "target": "2026-04-12"}, {"source": "边缘计算挑战", "target": "edge_computing"}, {"source": "边缘计算挑战", "target": "容器技术"}, {"source": "边缘计算挑战", "target": "工业物联网"}, {"source": "边缘计算挑战", "target": "工业物联网实施挑战"}, {"source": "边缘计算挑战", "target": "边缘计算"}, {"source": "预测性维护", "target": "物联网"}, {"source": "预测性维护", "target": "2026-04-12"}, {"source": "预测性维护", "target": "industrial_iot"}, {"source": "预测性维护", "target": "工业物联网"}, {"source": "预测性维护", "target": "数字孪生"}, {"source": "预测性维护", "target": "边缘计算"}];
+        
+        const width = document.querySelector('.graph-container').clientWidth;
+        const height = document.querySelector('.graph-container').clientHeight;
+        
+        const svg = d3.select('#graph')
+            .attr('width', width)
+            .attr('height', height);
+        
+        const simulation = d3.forceSimulation(nodes)
+            .force('link', d3.forceLink(links).id(d => d.id).distance(150))
+            .force('charge', d3.forceManyBody().strength(-500))
+            .force('center', d3.forceCenter(width / 2, height / 2))
+            .force('collision', d3.forceCollide().radius(40));
+        
+        const link = svg.append('g')
+            .selectAll('line')
+            .data(links)
+            .enter().append('line')
+            .attr('class', 'link');
+        
+        const node = svg.append('g')
+            .selectAll('circle')
+            .data(nodes)
+            .enter().append('circle')
+            .attr('class', 'node')
+            .attr('r', d => 10 + d.in_degree * 2)
+            .attr('fill', d => d.in_degree > 0 ? '#3498db' : '#95a5a6')
+            .call(d3.drag()
+                .on('start', dragstarted)
+                .on('drag', dragged)
+                .on('end', dragended));
+        
+        const label = svg.append('g')
+            .selectAll('text')
+            .data(nodes)
+            .enter().append('text')
+            .attr('class', 'node-label')
+            .text(d => d.id);
+        
+        const tooltip = d3.select('#tooltip');
+        
+        node.on('mouseover', (event, d) => {
+            tooltip.style('left', (event.pageX + 10) + 'px')
+                .style('top', (event.pageY - 10) + 'px')
+                .style('display', 'block')
+                .html('<strong>' + d.id + '</strong><br/>入度: ' + d.in_degree + '<br/>出度: ' + d.out_degree);
+        }).on('mouseout', () => {
+            tooltip.style('display', 'none');
+        });
+        
+        simulation.on('tick', () => {
+            link
+                .attr('x1', d => d.source.x)
+                .attr('y1', d => d.source.y)
+                .attr('x2', d => d.target.x)
+                .attr('y2', d => d.target.y);
+            
+            node
+                .attr('cx', d => d.x)
+                .attr('cy', d => d.y);
+            
+            label
+                .attr('x', d => d.x + 15)
+                .attr('y', d => d.y + 5);
+        });
+        
+        function dragstarted(event, d) {
+            if (!event.active) simulation.alphaTarget(0.3).restart();
+            d.fx = d.x;
+            d.fy = d.y;
+        }
+        
+        function dragged(event, d) {
+            d.fx = event.x;
+            d.fy = event.y;
+        }
+        
+        function dragended(event, d) {
+            if (!event.active) simulation.alphaTarget(0);
+            d.fx = null;
+            d.fy = null;
+        }
+    </script>
+</body>
+</html>

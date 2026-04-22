@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>知识图谱</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 0;
+            background: #1a1a1a;
+        }
+        .container { display: flex; height: 100vh; }
+        .sidebar {
+            width: 300px;
+            background: #2d2d2d;
+            color: white;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        .graph-container { flex: 1; }
+        h1 { font-size: 18px; margin-bottom: 20px; color: #3498db; }
+        .stat-item { margin: 10px 0; padding: 10px; background: #3d3d3d; border-radius: 5px; }
+        .node { stroke: #fff; stroke-width: 1.5px; cursor: pointer; }
+        .node:hover { stroke: #3498db; stroke-width: 3px; }
+        .link { stroke: #999; stroke-opacity: 0.6; }
+        .node-label { 
+            fill: white; 
+            font-size: 12px;
+            pointer-events: none;
+        }
+        .tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            pointer-events: none;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h1>知识图谱统计</h1>
+            <div class="stat-item" id="stats"></div>
+        </div>
+        <div class="graph-container" id="graph"></div>
+    </div>
+    
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script>
+        // 图谱数据
+        const nodes = [{"id": "compiled_knowledge", "in_degree": 0, "out_degree": 16}, {"id": "物联网", "in_degree": 82, "out_degree": 16}, {"id": "2026-04-12", "in_degree": 23, "out_degree": 0}, {"id": "5G技术", "in_degree": 5, "out_degree": 7}, {"id": "DDoS攻击", "in_degree": 4, "out_degree": 5}, {"id": "EdgeX Foundry", "in_degree": 1, "out_degree": 9}, {"id": "edge_computing", "in_degree": 6, "out_degree": 0}, {"id": "industrial_iot", "in_degree": 8, "out_degree": 0}, {"id": "KubeEdge", "in_degree": 3, "out_degree": 10}, {"id": "Kubernetes", "in_degree": 3, "out_degree": 8}, {"id": "Mirai僵尸网络", "in_degree": 4, "out_degree": 5}, {"id": "NIST_IR_8228", "in_degree": 1, "out_degree": 4}, {"id": "OpenYurt", "in_degree": 3, "out_degree": 6}, {"id": "OWASP_IoT_Top_10", "in_degree": 1, "out_degree": 3}, {"id": "RFID技术", "in_degree": 3, "out_degree": 6}, {"id": "TLS_DTLS", "in_degree": 1, "out_degree": 4}, {"id": "云计算", "in_degree": 4, "out_degree": 6}, {"id": "人工智能", "in_degree": 7, "out_degree": 8}, {"id": "传感器技术", "in_degree": 6, "out_degree": 6}, {"id": "供应链可视化", "in_degree": 0, "out_degree": 5}, {"id": "僵尸网络", "in_degree": 5, "out_degree": 6}, {"id": "协议转换网关", "in_degree": 3, "out_degree": 7}, {"id": "固件篡改", "in_degree": 3, "out_degree": 6}, {"id": "大数据分析", "in_degree": 7, "out_degree": 7}, {"id": "安全启动", "in_degree": 4, "out_degree": 5}, {"id": "容器技术", "in_degree": 5, "out_degree": 10}, {"id": "工业物联网", "in_degree": 18, "out_degree": 9}, {"id": "工业物联网实施挑战", "in_degree": 3, "out_degree": 8}, {"id": "工业物联网应用", "in_degree": 0, "out_degree": 3}, {"id": "数字孪生", "in_degree": 2, "out_degree": 7}, {"id": "数据孤岛问题", "in_degree": 1, "out_degree": 6}, {"id": "数据窃听", "in_degree": 2, "out_degree": 3}, {"id": "智能交通", "in_degree": 1, "out_degree": 11}, {"id": "智能医疗", "in_degree": 2, "out_degree": 7}, {"id": "智能家居", "in_degree": 4, "out_degree": 8}, {"id": "物联网基础", "in_degree": 14, "out_degree": 2}, {"id": "物联网安全", "in_degree": 13, "out_degree": 7}, {"id": "环境监测", "in_degree": 1, "out_degree": 7}, {"id": "生产过程优化", "in_degree": 1, "out_degree": 8}, {"id": "硬件安全模块", "in_degree": 3, "out_degree": 4}, {"id": "精确时间协议", "in_degree": 1, "out_degree": 6}, {"id": "设备劫持", "in_degree": 2, "out_degree": 4}, {"id": "边缘计算", "in_degree": 21, "out_degree": 6}, {"id": "边缘计算技术", "in_degree": 0, "out_degree": 1}, {"id": "边缘计算挑战", "in_degree": 1, "out_degree": 8}, {"id": "通信技术", "in_degree": 7, "out_degree": 6}, {"id": "预测性维护", "in_degree": 4, "out_degree": 7}];
+        const links = [{"source": "compiled_knowledge", "target": "物联网"}, {"source": "compiled_knowledge", "target": "DDoS攻击"}, {"source": "compiled_knowledge", "target": "Mirai僵尸网络"}, {"source": "compiled_knowledge", "target": "NIST_IR_8228"}, {"source": "compiled_knowledge", "target": "OWASP_IoT_Top_10"}, {"source": "compiled_knowledge", "target": "TLS_DTLS"}, {"source": "compiled_knowledge", "target": "僵尸网络"}, {"source": "compiled_knowledge", "target": "固件篡改"}, {"source": "compiled_knowledge", "target": "安全启动"}, {"source": "compiled_knowledge", "target": "工业物联网"}, {"source": "compiled_knowledge", "target": "数据窃听"}, {"source": "compiled_knowledge", "target": "智能家居"}, {"source": "compiled_knowledge", "target": "物联网"}, {"source": "compiled_knowledge", "target": "物联网安全"}, {"source": "compiled_knowledge", "target": "硬件安全模块"}, {"source": "compiled_knowledge", "target": "设备劫持"}, {"source": "5G技术", "target": "物联网"}, {"source": "5G技术", "target": "2026-04-12"}, {"source": "5G技术", "target": "工业物联网"}, {"source": "5G技术", "target": "物联网"}, {"source": "5G技术", "target": "物联网基础"}, {"source": "5G技术", "target": "边缘计算"}, {"source": "5G技术", "target": "通信技术"}, {"source": "DDoS攻击", "target": "物联网"}, {"source": "DDoS攻击", "target": "Mirai僵尸网络"}, {"source": "DDoS攻击", "target": "僵尸网络"}, {"source": "DDoS攻击", "target": "物联网"}, {"source": "DDoS攻击", "target": "物联网安全"}, {"source": "EdgeX Foundry", "target": "物联网"}, {"source": "EdgeX Foundry", "target": "2026-04-12"}, {"source": "EdgeX Foundry", "target": "edge_computing"}, {"source": "EdgeX Foundry", "target": "协议转换网关"}, {"source": "EdgeX Foundry", "target": "容器技术"}, {"source": "EdgeX Foundry", "target": "工业物联网"}, {"source": "EdgeX Foundry", "target": "物联网"}, {"source": "EdgeX Foundry", "target": "边缘计算"}, {"source": "EdgeX Foundry", "target": "预测性维护"}, {"source": "KubeEdge", "target": "物联网"}, {"source": "KubeEdge", "target": "2026-04-12"}, {"source": "KubeEdge", "target": "edge_computing"}, {"source": "KubeEdge", "target": "Kubernetes"}, {"source": "KubeEdge", "target": "OpenYurt"}, {"source": "KubeEdge", "target": "容器技术"}, {"source": "KubeEdge", "target": "工业物联网"}, {"source": "KubeEdge", "target": "物联网"}, {"source": "KubeEdge", "target": "边缘计算"}, {"source": "KubeEdge", "target": "边缘计算挑战"}, {"source": "Kubernetes", "target": "物联网"}, {"source": "Kubernetes", "target": "edge_computing"}, {"source": "Kubernetes", "target": "KubeEdge"}, {"source": "Kubernetes", "target": "OpenYurt"}, {"source": "Kubernetes", "target": "容器技术"}, {"source": "Kubernetes", "target": "工业物联网"}, {"source": "Kubernetes", "target": "物联网"}, {"source": "Kubernetes", "target": "边缘计算"}, {"source": "Mirai僵尸网络", "target": "物联网"}, {"source": "Mirai僵尸网络", "target": "DDoS攻击"}, {"source": "Mirai僵尸网络", "target": "僵尸网络"}, {"source": "Mirai僵尸网络", "target": "物联网"}, {"source": "Mirai僵尸网络", "target": "物联网安全"}, {"source": "NIST_IR_8228", "target": "物联网"}, {"source": "NIST_IR_8228", "target": "工业物联网"}, {"source": "NIST_IR_8228", "target": "物联网"}, {"source": "NIST_IR_8228", "target": "物联网安全"}, {"source": "OpenYurt", "target": "2026-04-12"}, {"source": "OpenYurt", "target": "edge_computing"}, {"source": "OpenYurt", "target": "KubeEdge"}, {"source": "OpenYurt", "target": "Kubernetes"}, {"source": "OpenYurt", "target": "容器技术"}, {"source": "OpenYurt", "target": "边缘计算"}, {"source": "OWASP_IoT_Top_10", "target": "物联网"}, {"source": "OWASP_IoT_Top_10", "target": "物联网"}, {"source": "OWASP_IoT_Top_10", "target": "物联网安全"}, {"source": "RFID技术", "target": "物联网"}, {"source": "RFID技术", "target": "2026-04-12"}, {"source": "RFID技术", "target": "传感器技术"}, {"source": "RFID技术", "target": "物联网"}, {"source": "RFID技术", "target": "物联网基础"}, {"source": "RFID技术", "target": "通信技术"}, {"source": "TLS_DTLS", "target": "物联网"}, {"source": "TLS_DTLS", "target": "数据窃听"}, {"source": "TLS_DTLS", "target": "物联网"}, {"source": "TLS_DTLS", "target": "物联网安全"}, {"source": "云计算", "target": "物联网"}, {"source": "云计算", "target": "2026-04-12"}, {"source": "云计算", "target": "大数据分析"}, {"source": "云计算", "target": "物联网"}, {"source": "云计算", "target": "物联网基础"}, {"source": "云计算", "target": "边缘计算"}, {"source": "人工智能", "target": "物联网"}, {"source": "人工智能", "target": "2026-04-12"}, {"source": "人工智能", "target": "大数据分析"}, {"source": "人工智能", "target": "智能医疗"}, {"source": "人工智能", "target": "智能家居"}, {"source": "人工智能", "target": "物联网"}, {"source": "人工智能", "target": "物联网基础"}, {"source": "人工智能", "target": "边缘计算"}, {"source": "传感器技术", "target": "物联网"}, {"source": "传感器技术", "target": "2026-04-12"}, {"source": "传感器技术", "target": "RFID技术"}, {"source": "传感器技术", "target": "物联网"}, {"source": "传感器技术", "target": "物联网基础"}, {"source": "传感器技术", "target": "通信技术"}, {"source": "供应链可视化", "target": "物联网"}, {"source": "供应链可视化", "target": "industrial_iot"}, {"source": "供应链可视化", "target": "工业物联网"}, {"source": "供应链可视化", "target": "物联网"}, {"source": "供应链可视化", "target": "边缘计算"}, {"source": "僵尸网络", "target": "物联网"}, {"source": "僵尸网络", "target": "DDoS攻击"}, {"source": "僵尸网络", "target": "Mirai僵尸网络"}, {"source": "僵尸网络", "target": "智能家居"}, {"source": "僵尸网络", "target": "物联网"}, {"source": "僵尸网络", "target": "物联网安全"}, {"source": "协议转换网关", "target": "物联网"}, {"source": "协议转换网关", "target": "2026-04-12"}, {"source": "协议转换网关", "target": "industrial_iot"}, {"source": "协议转换网关", "target": "工业物联网"}, {"source": "协议转换网关", "target": "工业物联网实施挑战"}, {"source": "协议转换网关", "target": "物联网"}, {"source": "协议转换网关", "target": "边缘计算"}, {"source": "固件篡改", "target": "物联网"}, {"source": "固件篡改", "target": "僵尸网络"}, {"source": "固件篡改", "target": "安全启动"}, {"source": "固件篡改", "target": "物联网"}, {"source": "固件篡改", "target": "物联网安全"}, {"source": "固件篡改", "target": "设备劫持"}, {"source": "大数据分析", "target": "物联网"}, {"source": "大数据分析", "target": "2026-04-12"}, {"source": "大数据分析", "target": "云计算"}, {"source": "大数据分析", "target": "人工智能"}, {"source": "大数据分析", "target": "物联网"}, {"source": "大数据分析", "target": "物联网基础"}, {"source": "大数据分析", "target": "预测性维护"}, {"source": "安全启动", "target": "物联网"}, {"source": "安全启动", "target": "固件篡改"}, {"source": "安全启动", "target": "物联网"}, {"source": "安全启动", "target": "物联网安全"}, {"source": "安全启动", "target": "硬件安全模块"}, {"source": "容器技术", "target": "物联网"}, {"source": "容器技术", "target": "2026-04-12"}, {"source": "容器技术", "target": "EdgeX Foundry"}, {"source": "容器技术", "target": "edge_computing"}, {"source": "容器技术", "target": "KubeEdge"}, {"source": "容器技术", "target": "Kubernetes"}, {"source": "容器技术", "target": "OpenYurt"}, {"source": "容器技术", "target": "工业物联网"}, {"source": "容器技术", "target": "物联网"}, {"source": "容器技术", "target": "边缘计算"}, {"source": "工业物联网", "target": "物联网"}, {"source": "工业物联网", "target": "2026-04-12"}, {"source": "工业物联网", "target": "5G技术"}, {"source": "工业物联网", "target": "人工智能"}, {"source": "工业物联网", "target": "大数据分析"}, {"source": "工业物联网", "target": "物联网"}, {"source": "工业物联网", "target": "物联网基础"}, {"source": "工业物联网", "target": "边缘计算"}, {"source": "工业物联网", "target": "预测性维护"}, {"source": "工业物联网实施挑战", "target": "物联网"}, {"source": "工业物联网实施挑战", "target": "2026-04-12"}, {"source": "工业物联网实施挑战", "target": "industrial_iot"}, {"source": "工业物联网实施挑战", "target": "协议转换网关"}, {"source": "工业物联网实施挑战", "target": "工业物联网"}, {"source": "工业物联网实施挑战", "target": "数据孤岛问题"}, {"source": "工业物联网实施挑战", "target": "物联网"}, {"source": "工业物联网实施挑战", "target": "边缘计算"}, {"source": "工业物联网应用", "target": "物联网"}, {"source": "工业物联网应用", "target": "工业物联网"}, {"source": "工业物联网应用", "target": "物联网"}, {"source": "数字孪生", "target": "物联网"}, {"source": "数字孪生", "target": "2026-04-12"}, {"source": "数字孪生", "target": "industrial_iot"}, {"source": "数字孪生", "target": "工业物联网"}, {"source": "数字孪生", "target": "物联网"}, {"source": "数字孪生", "target": "边缘计算"}, {"source": "数字孪生", "target": "预测性维护"}, {"source": "数据孤岛问题", "target": "物联网"}, {"source": "数据孤岛问题", "target": "industrial_iot"}, {"source": "数据孤岛问题", "target": "协议转换网关"}, {"source": "数据孤岛问题", "target": "工业物联网"}, {"source": "数据孤岛问题", "target": "工业物联网实施挑战"}, {"source": "数据孤岛问题", "target": "物联网"}, {"source": "数据窃听", "target": "物联网"}, {"source": "数据窃听", "target": "物联网"}, {"source": "数据窃听", "target": "物联网安全"}, {"source": "智能交通", "target": "物联网"}, {"source": "智能交通", "target": "2026-04-12"}, {"source": "智能交通", "target": "5G技术"}, {"source": "智能交通", "target": "RFID技术"}, {"source": "智能交通", "target": "人工智能"}, {"source": "智能交通", "target": "传感器技术"}, {"source": "智能交通", "target": "大数据分析"}, {"source": "智能交通", "target": "物联网"}, {"source": "智能交通", "target": "物联网基础"}, {"source": "智能交通", "target": "边缘计算"}, {"source": "智能交通", "target": "通信技术"}, {"source": "智能医疗", "target": "物联网"}, {"source": "智能医疗", "target": "2026-04-12"}, {"source": "智能医疗", "target": "人工智能"}, {"source": "智能医疗", "target": "传感器技术"}, {"source": "智能医疗", "target": "大数据分析"}, {"source": "智能医疗", "target": "物联网"}, {"source": "智能医疗", "target": "物联网基础"}, {"source": "智能家居", "target": "物联网"}, {"source": "智能家居", "target": "2026-04-12"}, {"source": "智能家居", "target": "云计算"}, {"source": "智能家居", "target": "人工智能"}, {"source": "智能家居", "target": "传感器技术"}, {"source": "智能家居", "target": "物联网"}, {"source": "智能家居", "target": "物联网基础"}, {"source": "智能家居", "target": "通信技术"}, {"source": "物联网", "target": "2026-04-12"}, {"source": "物联网", "target": "5G技术"}, {"source": "物联网", "target": "RFID技术"}, {"source": "物联网", "target": "云计算"}, {"source": "物联网", "target": "人工智能"}, {"source": "物联网", "target": "传感器技术"}, {"source": "物联网", "target": "大数据分析"}, {"source": "物联网", "target": "工业物联网"}, {"source": "物联网", "target": "智能交通"}, {"source": "物联网", "target": "智能医疗"}, {"source": "物联网", "target": "智能家居"}, {"source": "物联网", "target": "物联网基础"}, {"source": "物联网", "target": "物联网安全"}, {"source": "物联网", "target": "环境监测"}, {"source": "物联网", "target": "边缘计算"}, {"source": "物联网", "target": "通信技术"}, {"source": "物联网基础", "target": "物联网"}, {"source": "物联网基础", "target": "物联网"}, {"source": "物联网安全", "target": "物联网"}, {"source": "物联网安全", "target": "DDoS攻击"}, {"source": "物联网安全", "target": "Mirai僵尸网络"}, {"source": "物联网安全", "target": "僵尸网络"}, {"source": "物联网安全", "target": "安全启动"}, {"source": "物联网安全", "target": "物联网"}, {"source": "物联网安全", "target": "硬件安全模块"}, {"source": "环境监测", "target": "物联网"}, {"source": "环境监测", "target": "2026-04-12"}, {"source": "环境监测", "target": "传感器技术"}, {"source": "环境监测", "target": "大数据分析"}, {"source": "环境监测", "target": "物联网"}, {"source": "环境监测", "target": "物联网基础"}, {"source": "环境监测", "target": "通信技术"}, {"source": "生产过程优化", "target": "物联网"}, {"source": "生产过程优化", "target": "industrial_iot"}, {"source": "生产过程优化", "target": "人工智能"}, {"source": "生产过程优化", "target": "工业物联网"}, {"source": "生产过程优化", "target": "数字孪生"}, {"source": "生产过程优化", "target": "物联网"}, {"source": "生产过程优化", "target": "精确时间协议"}, {"source": "生产过程优化", "target": "边缘计算"}, {"source": "硬件安全模块", "target": "物联网"}, {"source": "硬件安全模块", "target": "安全启动"}, {"source": "硬件安全模块", "target": "物联网"}, {"source": "硬件安全模块", "target": "物联网安全"}, {"source": "精确时间协议", "target": "物联网"}, {"source": "精确时间协议", "target": "industrial_iot"}, {"source": "精确时间协议", "target": "工业物联网"}, {"source": "精确时间协议", "target": "物联网"}, {"source": "精确时间协议", "target": "生产过程优化"}, {"source": "精确时间协议", "target": "边缘计算"}, {"source": "设备劫持", "target": "物联网"}, {"source": "设备劫持", "target": "固件篡改"}, {"source": "设备劫持", "target": "物联网"}, {"source": "设备劫持", "target": "物联网安全"}, {"source": "边缘计算", "target": "物联网"}, {"source": "边缘计算", "target": "2026-04-12"}, {"source": "边缘计算", "target": "5G技术"}, {"source": "边缘计算", "target": "云计算"}, {"source": "边缘计算", "target": "物联网"}, {"source": "边缘计算", "target": "物联网基础"}, {"source": "边缘计算技术", "target": "边缘计算"}, {"source": "边缘计算挑战", "target": "物联网"}, {"source": "边缘计算挑战", "target": "2026-04-12"}, {"source": "边缘计算挑战", "target": "edge_computing"}, {"source": "边缘计算挑战", "target": "容器技术"}, {"source": "边缘计算挑战", "target": "工业物联网"}, {"source": "边缘计算挑战", "target": "工业物联网实施挑战"}, {"source": "边缘计算挑战", "target": "物联网"}, {"source": "边缘计算挑战", "target": "边缘计算"}, {"source": "通信技术", "target": "物联网"}, {"source": "通信技术", "target": "2026-04-12"}, {"source": "通信技术", "target": "5G技术"}, {"source": "通信技术", "target": "物联网"}, {"source": "通信技术", "target": "物联网基础"}, {"source": "通信技术", "target": "边缘计算"}, {"source": "预测性维护", "target": "物联网"}, {"source": "预测性维护", "target": "2026-04-12"}, {"source": "预测性维护", "target": "industrial_iot"}, {"source": "预测性维护", "target": "工业物联网"}, {"source": "预测性维护", "target": "数字孪生"}, {"source": "预测性维护", "target": "物联网"}, {"source": "预测性维护", "target": "边缘计算"}];
+        
+        // 统计数据
+        const stats = {"generated_at": "2026-04-22T15:15:39.144672", "total_pages": 47, "total_links": 293, "avg_degree": 12.47, "most_cited": [{"name": "物联网", "count": 82}, {"name": "2026-04-12", "count": 23}, {"name": "边缘计算", "count": 21}, {"name": "工业物联网", "count": 18}, {"name": "物联网基础", "count": 14}], "most_linking": [{"name": "compiled_knowledge", "count": 16}, {"name": "物联网", "count": 16}, {"name": "智能交通", "count": 11}, {"name": "KubeEdge", "count": 10}, {"name": "容器技术", "count": 10}], "isolated_pages": []};
+        
+        // 渲染统计信息
+        document.getElementById('stats').innerHTML = `
+            <p><strong>总页面数:</strong> ${stats.total_pages}</p>
+            <p><strong>总链接数:</strong> ${stats.total_links}</p>
+            <p><strong>平均度数:</strong> ${stats.avg_degree}</p>
+            <p><strong>最受引用:</strong></p>
+            <ul>${stats.most_cited.map(item => `<li>${item.name}: ${item.count}</li>`).join('')}</ul>
+            <p><strong>引用最多:</strong></p>
+            <ul>${stats.most_linking.map(item => `<li>${item.name}: ${item.count}</li>`).join('')}</ul>
+            <p><strong>孤立页面:</strong> ${stats.isolated_pages.length}</p>
+        `;
+        
+        // 创建 SVG
+        const width = document.getElementById('graph').clientWidth;
+        const height = document.getElementById('graph').clientHeight;
+        
+        const svg = d3.select('#graph')
+            .append('svg')
+            .attr('width', width)
+            .attr('height', height);
+        
+        // 创建力导向图
+        const simulation = d3.forceSimulation(nodes)
+            .force('link', d3.forceLink(links).id(d => d.id).distance(100))
+            .force('charge', d3.forceManyBody().strength(-300))
+            .force('center', d3.forceCenter(width / 2, height / 2));
+        
+        // 创建链接
+        const link = svg.append('g')
+            .selectAll('line')
+            .data(links)
+            .enter()
+            .append('line')
+            .attr('class', 'link');
+        
+        // 创建节点
+        const node = svg.append('g')
+            .selectAll('circle')
+            .data(nodes)
+            .enter()
+            .append('circle')
+            .attr('class', 'node')
+            .attr('r', d => Math.max(5, Math.min(15, d.in_degree + 5)))
+            .style('fill', d => d.in_degree > 0 ? '#3498db' : '#e74c3c');
+        
+        // 添加标签
+        const label = svg.append('g')
+            .selectAll('text')
+            .data(nodes)
+            .enter()
+            .append('text')
+            .attr('class', 'node-label')
+            .text(d => d.id)
+            .attr('dx', 12)
+            .attr('dy', 4);
+        
+        // 创建提示框
+        const tooltip = d3.select('body')
+            .append('div')
+            .attr('class', 'tooltip')
+            .style('opacity', 0);
+        
+        // 鼠标事件
+        node.on('mouseover', function(event, d) {
+            tooltip.transition()
+                .duration(200)
+                .style('opacity', .9);
+            tooltip.html(`
+                <strong>${d.id}</strong><br/>
+                入度: ${d.in_degree}<br/>
+                出度: ${d.out_degree}
+            `)
+                .style('left', (event.pageX + 10) + 'px')
+                .style('top', (event.pageY - 28) + 'px');
+        })
+        .on('mouseout', function() {
+            tooltip.transition()
+                .duration(500)
+                .style('opacity', 0);
+        });
+        
+        // 力导向图更新
+        simulation.on('tick', () => {
+            link
+                .attr('x1', d => d.source.x)
+                .attr('y1', d => d.source.y)
+                .attr('x2', d => d.target.x)
+                .attr('y2', d => d.target.y);
+            
+            node
+                .attr('cx', d => d.x = Math.max(10, Math.min(width - 10, d.x)))
+                .attr('cy', d => d.y = Math.max(10, Math.min(height - 10, d.y)));
+            
+            label
+                .attr('x', d => d.x)
+                .attr('y', d => d.y);
+        });
+    </script>
+</body>
+</html>

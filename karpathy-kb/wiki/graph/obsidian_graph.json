@@ -1,0 +1,1322 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {},
+  "nodes": [
+    {
+      "id": "compiled_knowledge"
+    },
+    {
+      "id": "物联网"
+    },
+    {
+      "id": "2026-04-12"
+    },
+    {
+      "id": "5G技术"
+    },
+    {
+      "id": "DDoS攻击"
+    },
+    {
+      "id": "EdgeX Foundry"
+    },
+    {
+      "id": "edge_computing"
+    },
+    {
+      "id": "industrial_iot"
+    },
+    {
+      "id": "KubeEdge"
+    },
+    {
+      "id": "Kubernetes"
+    },
+    {
+      "id": "Mirai僵尸网络"
+    },
+    {
+      "id": "NIST_IR_8228"
+    },
+    {
+      "id": "OpenYurt"
+    },
+    {
+      "id": "OWASP_IoT_Top_10"
+    },
+    {
+      "id": "RFID技术"
+    },
+    {
+      "id": "TLS_DTLS"
+    },
+    {
+      "id": "云计算"
+    },
+    {
+      "id": "人工智能"
+    },
+    {
+      "id": "传感器技术"
+    },
+    {
+      "id": "供应链可视化"
+    },
+    {
+      "id": "僵尸网络"
+    },
+    {
+      "id": "协议转换网关"
+    },
+    {
+      "id": "固件篡改"
+    },
+    {
+      "id": "大数据分析"
+    },
+    {
+      "id": "安全启动"
+    },
+    {
+      "id": "容器技术"
+    },
+    {
+      "id": "工业物联网"
+    },
+    {
+      "id": "工业物联网实施挑战"
+    },
+    {
+      "id": "工业物联网应用"
+    },
+    {
+      "id": "数字孪生"
+    },
+    {
+      "id": "数据孤岛问题"
+    },
+    {
+      "id": "数据窃听"
+    },
+    {
+      "id": "智能交通"
+    },
+    {
+      "id": "智能医疗"
+    },
+    {
+      "id": "智能家居"
+    },
+    {
+      "id": "物联网基础"
+    },
+    {
+      "id": "物联网安全"
+    },
+    {
+      "id": "环境监测"
+    },
+    {
+      "id": "生产过程优化"
+    },
+    {
+      "id": "硬件安全模块"
+    },
+    {
+      "id": "精确时间协议"
+    },
+    {
+      "id": "设备劫持"
+    },
+    {
+      "id": "边缘计算"
+    },
+    {
+      "id": "边缘计算技术"
+    },
+    {
+      "id": "边缘计算挑战"
+    },
+    {
+      "id": "通信技术"
+    },
+    {
+      "id": "预测性维护"
+    }
+  ],
+  "links": [
+    {
+      "source": "compiled_knowledge",
+      "target": "物联网"
+    },
+    {
+      "source": "compiled_knowledge",
+      "target": "DDoS攻击"
+    },
+    {
+      "source": "compiled_knowledge",
+      "target": "Mirai僵尸网络"
+    },
+    {
+      "source": "compiled_knowledge",
+      "target": "NIST_IR_8228"
+    },
+    {
+      "source": "compiled_knowledge",
+      "target": "OWASP_IoT_Top_10"
+    },
+    {
+      "source": "compiled_knowledge",
+      "target": "TLS_DTLS"
+    },
+    {
+      "source": "compiled_knowledge",
+      "target": "僵尸网络"
+    },
+    {
+      "source": "compiled_knowledge",
+      "target": "固件篡改"
+    },
+    {
+      "source": "compiled_knowledge",
+      "target": "安全启动"
+    },
+    {
+      "source": "compiled_knowledge",
+      "target": "工业物联网"
+    },
+    {
+      "source": "compiled_knowledge",
+      "target": "数据窃听"
+    },
+    {
+      "source": "compiled_knowledge",
+      "target": "智能家居"
+    },
+    {
+      "source": "compiled_knowledge",
+      "target": "物联网"
+    },
+    {
+      "source": "compiled_knowledge",
+      "target": "物联网安全"
+    },
+    {
+      "source": "compiled_knowledge",
+      "target": "硬件安全模块"
+    },
+    {
+      "source": "compiled_knowledge",
+      "target": "设备劫持"
+    },
+    {
+      "source": "5G技术",
+      "target": "物联网"
+    },
+    {
+      "source": "5G技术",
+      "target": "2026-04-12"
+    },
+    {
+      "source": "5G技术",
+      "target": "工业物联网"
+    },
+    {
+      "source": "5G技术",
+      "target": "物联网"
+    },
+    {
+      "source": "5G技术",
+      "target": "物联网基础"
+    },
+    {
+      "source": "5G技术",
+      "target": "边缘计算"
+    },
+    {
+      "source": "5G技术",
+      "target": "通信技术"
+    },
+    {
+      "source": "DDoS攻击",
+      "target": "物联网"
+    },
+    {
+      "source": "DDoS攻击",
+      "target": "Mirai僵尸网络"
+    },
+    {
+      "source": "DDoS攻击",
+      "target": "僵尸网络"
+    },
+    {
+      "source": "DDoS攻击",
+      "target": "物联网"
+    },
+    {
+      "source": "DDoS攻击",
+      "target": "物联网安全"
+    },
+    {
+      "source": "EdgeX Foundry",
+      "target": "物联网"
+    },
+    {
+      "source": "EdgeX Foundry",
+      "target": "2026-04-12"
+    },
+    {
+      "source": "EdgeX Foundry",
+      "target": "edge_computing"
+    },
+    {
+      "source": "EdgeX Foundry",
+      "target": "协议转换网关"
+    },
+    {
+      "source": "EdgeX Foundry",
+      "target": "容器技术"
+    },
+    {
+      "source": "EdgeX Foundry",
+      "target": "工业物联网"
+    },
+    {
+      "source": "EdgeX Foundry",
+      "target": "物联网"
+    },
+    {
+      "source": "EdgeX Foundry",
+      "target": "边缘计算"
+    },
+    {
+      "source": "EdgeX Foundry",
+      "target": "预测性维护"
+    },
+    {
+      "source": "KubeEdge",
+      "target": "物联网"
+    },
+    {
+      "source": "KubeEdge",
+      "target": "2026-04-12"
+    },
+    {
+      "source": "KubeEdge",
+      "target": "edge_computing"
+    },
+    {
+      "source": "KubeEdge",
+      "target": "Kubernetes"
+    },
+    {
+      "source": "KubeEdge",
+      "target": "OpenYurt"
+    },
+    {
+      "source": "KubeEdge",
+      "target": "容器技术"
+    },
+    {
+      "source": "KubeEdge",
+      "target": "工业物联网"
+    },
+    {
+      "source": "KubeEdge",
+      "target": "物联网"
+    },
+    {
+      "source": "KubeEdge",
+      "target": "边缘计算"
+    },
+    {
+      "source": "KubeEdge",
+      "target": "边缘计算挑战"
+    },
+    {
+      "source": "Kubernetes",
+      "target": "物联网"
+    },
+    {
+      "source": "Kubernetes",
+      "target": "edge_computing"
+    },
+    {
+      "source": "Kubernetes",
+      "target": "KubeEdge"
+    },
+    {
+      "source": "Kubernetes",
+      "target": "OpenYurt"
+    },
+    {
+      "source": "Kubernetes",
+      "target": "容器技术"
+    },
+    {
+      "source": "Kubernetes",
+      "target": "工业物联网"
+    },
+    {
+      "source": "Kubernetes",
+      "target": "物联网"
+    },
+    {
+      "source": "Kubernetes",
+      "target": "边缘计算"
+    },
+    {
+      "source": "Mirai僵尸网络",
+      "target": "物联网"
+    },
+    {
+      "source": "Mirai僵尸网络",
+      "target": "DDoS攻击"
+    },
+    {
+      "source": "Mirai僵尸网络",
+      "target": "僵尸网络"
+    },
+    {
+      "source": "Mirai僵尸网络",
+      "target": "物联网"
+    },
+    {
+      "source": "Mirai僵尸网络",
+      "target": "物联网安全"
+    },
+    {
+      "source": "NIST_IR_8228",
+      "target": "物联网"
+    },
+    {
+      "source": "NIST_IR_8228",
+      "target": "工业物联网"
+    },
+    {
+      "source": "NIST_IR_8228",
+      "target": "物联网"
+    },
+    {
+      "source": "NIST_IR_8228",
+      "target": "物联网安全"
+    },
+    {
+      "source": "OpenYurt",
+      "target": "2026-04-12"
+    },
+    {
+      "source": "OpenYurt",
+      "target": "edge_computing"
+    },
+    {
+      "source": "OpenYurt",
+      "target": "KubeEdge"
+    },
+    {
+      "source": "OpenYurt",
+      "target": "Kubernetes"
+    },
+    {
+      "source": "OpenYurt",
+      "target": "容器技术"
+    },
+    {
+      "source": "OpenYurt",
+      "target": "边缘计算"
+    },
+    {
+      "source": "OWASP_IoT_Top_10",
+      "target": "物联网"
+    },
+    {
+      "source": "OWASP_IoT_Top_10",
+      "target": "物联网"
+    },
+    {
+      "source": "OWASP_IoT_Top_10",
+      "target": "物联网安全"
+    },
+    {
+      "source": "RFID技术",
+      "target": "物联网"
+    },
+    {
+      "source": "RFID技术",
+      "target": "2026-04-12"
+    },
+    {
+      "source": "RFID技术",
+      "target": "传感器技术"
+    },
+    {
+      "source": "RFID技术",
+      "target": "物联网"
+    },
+    {
+      "source": "RFID技术",
+      "target": "物联网基础"
+    },
+    {
+      "source": "RFID技术",
+      "target": "通信技术"
+    },
+    {
+      "source": "TLS_DTLS",
+      "target": "物联网"
+    },
+    {
+      "source": "TLS_DTLS",
+      "target": "数据窃听"
+    },
+    {
+      "source": "TLS_DTLS",
+      "target": "物联网"
+    },
+    {
+      "source": "TLS_DTLS",
+      "target": "物联网安全"
+    },
+    {
+      "source": "云计算",
+      "target": "物联网"
+    },
+    {
+      "source": "云计算",
+      "target": "2026-04-12"
+    },
+    {
+      "source": "云计算",
+      "target": "大数据分析"
+    },
+    {
+      "source": "云计算",
+      "target": "物联网"
+    },
+    {
+      "source": "云计算",
+      "target": "物联网基础"
+    },
+    {
+      "source": "云计算",
+      "target": "边缘计算"
+    },
+    {
+      "source": "人工智能",
+      "target": "物联网"
+    },
+    {
+      "source": "人工智能",
+      "target": "2026-04-12"
+    },
+    {
+      "source": "人工智能",
+      "target": "大数据分析"
+    },
+    {
+      "source": "人工智能",
+      "target": "智能医疗"
+    },
+    {
+      "source": "人工智能",
+      "target": "智能家居"
+    },
+    {
+      "source": "人工智能",
+      "target": "物联网"
+    },
+    {
+      "source": "人工智能",
+      "target": "物联网基础"
+    },
+    {
+      "source": "人工智能",
+      "target": "边缘计算"
+    },
+    {
+      "source": "传感器技术",
+      "target": "物联网"
+    },
+    {
+      "source": "传感器技术",
+      "target": "2026-04-12"
+    },
+    {
+      "source": "传感器技术",
+      "target": "RFID技术"
+    },
+    {
+      "source": "传感器技术",
+      "target": "物联网"
+    },
+    {
+      "source": "传感器技术",
+      "target": "物联网基础"
+    },
+    {
+      "source": "传感器技术",
+      "target": "通信技术"
+    },
+    {
+      "source": "供应链可视化",
+      "target": "物联网"
+    },
+    {
+      "source": "供应链可视化",
+      "target": "industrial_iot"
+    },
+    {
+      "source": "供应链可视化",
+      "target": "工业物联网"
+    },
+    {
+      "source": "供应链可视化",
+      "target": "物联网"
+    },
+    {
+      "source": "供应链可视化",
+      "target": "边缘计算"
+    },
+    {
+      "source": "僵尸网络",
+      "target": "物联网"
+    },
+    {
+      "source": "僵尸网络",
+      "target": "DDoS攻击"
+    },
+    {
+      "source": "僵尸网络",
+      "target": "Mirai僵尸网络"
+    },
+    {
+      "source": "僵尸网络",
+      "target": "智能家居"
+    },
+    {
+      "source": "僵尸网络",
+      "target": "物联网"
+    },
+    {
+      "source": "僵尸网络",
+      "target": "物联网安全"
+    },
+    {
+      "source": "协议转换网关",
+      "target": "物联网"
+    },
+    {
+      "source": "协议转换网关",
+      "target": "2026-04-12"
+    },
+    {
+      "source": "协议转换网关",
+      "target": "industrial_iot"
+    },
+    {
+      "source": "协议转换网关",
+      "target": "工业物联网"
+    },
+    {
+      "source": "协议转换网关",
+      "target": "工业物联网实施挑战"
+    },
+    {
+      "source": "协议转换网关",
+      "target": "物联网"
+    },
+    {
+      "source": "协议转换网关",
+      "target": "边缘计算"
+    },
+    {
+      "source": "固件篡改",
+      "target": "物联网"
+    },
+    {
+      "source": "固件篡改",
+      "target": "僵尸网络"
+    },
+    {
+      "source": "固件篡改",
+      "target": "安全启动"
+    },
+    {
+      "source": "固件篡改",
+      "target": "物联网"
+    },
+    {
+      "source": "固件篡改",
+      "target": "物联网安全"
+    },
+    {
+      "source": "固件篡改",
+      "target": "设备劫持"
+    },
+    {
+      "source": "大数据分析",
+      "target": "物联网"
+    },
+    {
+      "source": "大数据分析",
+      "target": "2026-04-12"
+    },
+    {
+      "source": "大数据分析",
+      "target": "云计算"
+    },
+    {
+      "source": "大数据分析",
+      "target": "人工智能"
+    },
+    {
+      "source": "大数据分析",
+      "target": "物联网"
+    },
+    {
+      "source": "大数据分析",
+      "target": "物联网基础"
+    },
+    {
+      "source": "大数据分析",
+      "target": "预测性维护"
+    },
+    {
+      "source": "安全启动",
+      "target": "物联网"
+    },
+    {
+      "source": "安全启动",
+      "target": "固件篡改"
+    },
+    {
+      "source": "安全启动",
+      "target": "物联网"
+    },
+    {
+      "source": "安全启动",
+      "target": "物联网安全"
+    },
+    {
+      "source": "安全启动",
+      "target": "硬件安全模块"
+    },
+    {
+      "source": "容器技术",
+      "target": "物联网"
+    },
+    {
+      "source": "容器技术",
+      "target": "2026-04-12"
+    },
+    {
+      "source": "容器技术",
+      "target": "EdgeX Foundry"
+    },
+    {
+      "source": "容器技术",
+      "target": "edge_computing"
+    },
+    {
+      "source": "容器技术",
+      "target": "KubeEdge"
+    },
+    {
+      "source": "容器技术",
+      "target": "Kubernetes"
+    },
+    {
+      "source": "容器技术",
+      "target": "OpenYurt"
+    },
+    {
+      "source": "容器技术",
+      "target": "工业物联网"
+    },
+    {
+      "source": "容器技术",
+      "target": "物联网"
+    },
+    {
+      "source": "容器技术",
+      "target": "边缘计算"
+    },
+    {
+      "source": "工业物联网",
+      "target": "物联网"
+    },
+    {
+      "source": "工业物联网",
+      "target": "2026-04-12"
+    },
+    {
+      "source": "工业物联网",
+      "target": "5G技术"
+    },
+    {
+      "source": "工业物联网",
+      "target": "人工智能"
+    },
+    {
+      "source": "工业物联网",
+      "target": "大数据分析"
+    },
+    {
+      "source": "工业物联网",
+      "target": "物联网"
+    },
+    {
+      "source": "工业物联网",
+      "target": "物联网基础"
+    },
+    {
+      "source": "工业物联网",
+      "target": "边缘计算"
+    },
+    {
+      "source": "工业物联网",
+      "target": "预测性维护"
+    },
+    {
+      "source": "工业物联网实施挑战",
+      "target": "物联网"
+    },
+    {
+      "source": "工业物联网实施挑战",
+      "target": "2026-04-12"
+    },
+    {
+      "source": "工业物联网实施挑战",
+      "target": "industrial_iot"
+    },
+    {
+      "source": "工业物联网实施挑战",
+      "target": "协议转换网关"
+    },
+    {
+      "source": "工业物联网实施挑战",
+      "target": "工业物联网"
+    },
+    {
+      "source": "工业物联网实施挑战",
+      "target": "数据孤岛问题"
+    },
+    {
+      "source": "工业物联网实施挑战",
+      "target": "物联网"
+    },
+    {
+      "source": "工业物联网实施挑战",
+      "target": "边缘计算"
+    },
+    {
+      "source": "工业物联网应用",
+      "target": "物联网"
+    },
+    {
+      "source": "工业物联网应用",
+      "target": "工业物联网"
+    },
+    {
+      "source": "工业物联网应用",
+      "target": "物联网"
+    },
+    {
+      "source": "数字孪生",
+      "target": "物联网"
+    },
+    {
+      "source": "数字孪生",
+      "target": "2026-04-12"
+    },
+    {
+      "source": "数字孪生",
+      "target": "industrial_iot"
+    },
+    {
+      "source": "数字孪生",
+      "target": "工业物联网"
+    },
+    {
+      "source": "数字孪生",
+      "target": "物联网"
+    },
+    {
+      "source": "数字孪生",
+      "target": "边缘计算"
+    },
+    {
+      "source": "数字孪生",
+      "target": "预测性维护"
+    },
+    {
+      "source": "数据孤岛问题",
+      "target": "物联网"
+    },
+    {
+      "source": "数据孤岛问题",
+      "target": "industrial_iot"
+    },
+    {
+      "source": "数据孤岛问题",
+      "target": "协议转换网关"
+    },
+    {
+      "source": "数据孤岛问题",
+      "target": "工业物联网"
+    },
+    {
+      "source": "数据孤岛问题",
+      "target": "工业物联网实施挑战"
+    },
+    {
+      "source": "数据孤岛问题",
+      "target": "物联网"
+    },
+    {
+      "source": "数据窃听",
+      "target": "物联网"
+    },
+    {
+      "source": "数据窃听",
+      "target": "物联网"
+    },
+    {
+      "source": "数据窃听",
+      "target": "物联网安全"
+    },
+    {
+      "source": "智能交通",
+      "target": "物联网"
+    },
+    {
+      "source": "智能交通",
+      "target": "2026-04-12"
+    },
+    {
+      "source": "智能交通",
+      "target": "5G技术"
+    },
+    {
+      "source": "智能交通",
+      "target": "RFID技术"
+    },
+    {
+      "source": "智能交通",
+      "target": "人工智能"
+    },
+    {
+      "source": "智能交通",
+      "target": "传感器技术"
+    },
+    {
+      "source": "智能交通",
+      "target": "大数据分析"
+    },
+    {
+      "source": "智能交通",
+      "target": "物联网"
+    },
+    {
+      "source": "智能交通",
+      "target": "物联网基础"
+    },
+    {
+      "source": "智能交通",
+      "target": "边缘计算"
+    },
+    {
+      "source": "智能交通",
+      "target": "通信技术"
+    },
+    {
+      "source": "智能医疗",
+      "target": "物联网"
+    },
+    {
+      "source": "智能医疗",
+      "target": "2026-04-12"
+    },
+    {
+      "source": "智能医疗",
+      "target": "人工智能"
+    },
+    {
+      "source": "智能医疗",
+      "target": "传感器技术"
+    },
+    {
+      "source": "智能医疗",
+      "target": "大数据分析"
+    },
+    {
+      "source": "智能医疗",
+      "target": "物联网"
+    },
+    {
+      "source": "智能医疗",
+      "target": "物联网基础"
+    },
+    {
+      "source": "智能家居",
+      "target": "物联网"
+    },
+    {
+      "source": "智能家居",
+      "target": "2026-04-12"
+    },
+    {
+      "source": "智能家居",
+      "target": "云计算"
+    },
+    {
+      "source": "智能家居",
+      "target": "人工智能"
+    },
+    {
+      "source": "智能家居",
+      "target": "传感器技术"
+    },
+    {
+      "source": "智能家居",
+      "target": "物联网"
+    },
+    {
+      "source": "智能家居",
+      "target": "物联网基础"
+    },
+    {
+      "source": "智能家居",
+      "target": "通信技术"
+    },
+    {
+      "source": "物联网",
+      "target": "2026-04-12"
+    },
+    {
+      "source": "物联网",
+      "target": "5G技术"
+    },
+    {
+      "source": "物联网",
+      "target": "RFID技术"
+    },
+    {
+      "source": "物联网",
+      "target": "云计算"
+    },
+    {
+      "source": "物联网",
+      "target": "人工智能"
+    },
+    {
+      "source": "物联网",
+      "target": "传感器技术"
+    },
+    {
+      "source": "物联网",
+      "target": "大数据分析"
+    },
+    {
+      "source": "物联网",
+      "target": "工业物联网"
+    },
+    {
+      "source": "物联网",
+      "target": "智能交通"
+    },
+    {
+      "source": "物联网",
+      "target": "智能医疗"
+    },
+    {
+      "source": "物联网",
+      "target": "智能家居"
+    },
+    {
+      "source": "物联网",
+      "target": "物联网基础"
+    },
+    {
+      "source": "物联网",
+      "target": "物联网安全"
+    },
+    {
+      "source": "物联网",
+      "target": "环境监测"
+    },
+    {
+      "source": "物联网",
+      "target": "边缘计算"
+    },
+    {
+      "source": "物联网",
+      "target": "通信技术"
+    },
+    {
+      "source": "物联网基础",
+      "target": "物联网"
+    },
+    {
+      "source": "物联网基础",
+      "target": "物联网"
+    },
+    {
+      "source": "物联网安全",
+      "target": "物联网"
+    },
+    {
+      "source": "物联网安全",
+      "target": "DDoS攻击"
+    },
+    {
+      "source": "物联网安全",
+      "target": "Mirai僵尸网络"
+    },
+    {
+      "source": "物联网安全",
+      "target": "僵尸网络"
+    },
+    {
+      "source": "物联网安全",
+      "target": "安全启动"
+    },
+    {
+      "source": "物联网安全",
+      "target": "物联网"
+    },
+    {
+      "source": "物联网安全",
+      "target": "硬件安全模块"
+    },
+    {
+      "source": "环境监测",
+      "target": "物联网"
+    },
+    {
+      "source": "环境监测",
+      "target": "2026-04-12"
+    },
+    {
+      "source": "环境监测",
+      "target": "传感器技术"
+    },
+    {
+      "source": "环境监测",
+      "target": "大数据分析"
+    },
+    {
+      "source": "环境监测",
+      "target": "物联网"
+    },
+    {
+      "source": "环境监测",
+      "target": "物联网基础"
+    },
+    {
+      "source": "环境监测",
+      "target": "通信技术"
+    },
+    {
+      "source": "生产过程优化",
+      "target": "物联网"
+    },
+    {
+      "source": "生产过程优化",
+      "target": "industrial_iot"
+    },
+    {
+      "source": "生产过程优化",
+      "target": "人工智能"
+    },
+    {
+      "source": "生产过程优化",
+      "target": "工业物联网"
+    },
+    {
+      "source": "生产过程优化",
+      "target": "数字孪生"
+    },
+    {
+      "source": "生产过程优化",
+      "target": "物联网"
+    },
+    {
+      "source": "生产过程优化",
+      "target": "精确时间协议"
+    },
+    {
+      "source": "生产过程优化",
+      "target": "边缘计算"
+    },
+    {
+      "source": "硬件安全模块",
+      "target": "物联网"
+    },
+    {
+      "source": "硬件安全模块",
+      "target": "安全启动"
+    },
+    {
+      "source": "硬件安全模块",
+      "target": "物联网"
+    },
+    {
+      "source": "硬件安全模块",
+      "target": "物联网安全"
+    },
+    {
+      "source": "精确时间协议",
+      "target": "物联网"
+    },
+    {
+      "source": "精确时间协议",
+      "target": "industrial_iot"
+    },
+    {
+      "source": "精确时间协议",
+      "target": "工业物联网"
+    },
+    {
+      "source": "精确时间协议",
+      "target": "物联网"
+    },
+    {
+      "source": "精确时间协议",
+      "target": "生产过程优化"
+    },
+    {
+      "source": "精确时间协议",
+      "target": "边缘计算"
+    },
+    {
+      "source": "设备劫持",
+      "target": "物联网"
+    },
+    {
+      "source": "设备劫持",
+      "target": "固件篡改"
+    },
+    {
+      "source": "设备劫持",
+      "target": "物联网"
+    },
+    {
+      "source": "设备劫持",
+      "target": "物联网安全"
+    },
+    {
+      "source": "边缘计算",
+      "target": "物联网"
+    },
+    {
+      "source": "边缘计算",
+      "target": "2026-04-12"
+    },
+    {
+      "source": "边缘计算",
+      "target": "5G技术"
+    },
+    {
+      "source": "边缘计算",
+      "target": "云计算"
+    },
+    {
+      "source": "边缘计算",
+      "target": "物联网"
+    },
+    {
+      "source": "边缘计算",
+      "target": "物联网基础"
+    },
+    {
+      "source": "边缘计算技术",
+      "target": "边缘计算"
+    },
+    {
+      "source": "边缘计算挑战",
+      "target": "物联网"
+    },
+    {
+      "source": "边缘计算挑战",
+      "target": "2026-04-12"
+    },
+    {
+      "source": "边缘计算挑战",
+      "target": "edge_computing"
+    },
+    {
+      "source": "边缘计算挑战",
+      "target": "容器技术"
+    },
+    {
+      "source": "边缘计算挑战",
+      "target": "工业物联网"
+    },
+    {
+      "source": "边缘计算挑战",
+      "target": "工业物联网实施挑战"
+    },
+    {
+      "source": "边缘计算挑战",
+      "target": "物联网"
+    },
+    {
+      "source": "边缘计算挑战",
+      "target": "边缘计算"
+    },
+    {
+      "source": "通信技术",
+      "target": "物联网"
+    },
+    {
+      "source": "通信技术",
+      "target": "2026-04-12"
+    },
+    {
+      "source": "通信技术",
+      "target": "5G技术"
+    },
+    {
+      "source": "通信技术",
+      "target": "物联网"
+    },
+    {
+      "source": "通信技术",
+      "target": "物联网基础"
+    },
+    {
+      "source": "通信技术",
+      "target": "边缘计算"
+    },
+    {
+      "source": "预测性维护",
+      "target": "物联网"
+    },
+    {
+      "source": "预测性维护",
+      "target": "2026-04-12"
+    },
+    {
+      "source": "预测性维护",
+      "target": "industrial_iot"
+    },
+    {
+      "source": "预测性维护",
+      "target": "工业物联网"
+    },
+    {
+      "source": "预测性维护",
+      "target": "数字孪生"
+    },
+    {
+      "source": "预测性维护",
+      "target": "物联网"
+    },
+    {
+      "source": "预测性维护",
+      "target": "边缘计算"
+    }
+  ]
+}
